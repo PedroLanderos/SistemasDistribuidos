@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Servidor HTTP - Prueba de Suma</title>
+  <script>
+    function get(req, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', req, true);
+      xhr.onload = function() {
+        if (callback != null) callback(xhr.status, xhr.responseText);
+      };
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <h1>Prueba de suma con ServidorHTTP</h1>
+  <p>
+    <button onclick="get('/suma?a=1&b=2&c=3', function(status,response){alert('Respuesta: ' + status + ' → ' + response);})">
+      Calcular 1+2+3
+    </button>
+  </p>
+</body>
+</html>
