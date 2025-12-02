@@ -1,0 +1,430 @@
+{
+  "info": {
+    "name": "Servicio - Backend Sistemas Distribuidos",
+    "_postman_id": "e0f5c5f2-1111-2222-3333-abcdef123456",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/Servicio/rest/ws"
+    },
+    {
+      "key": "email",
+      "value": "usuario1@test.com"
+    },
+    {
+      "key": "password",
+      "value": "1234"
+    },
+    {
+      "key": "token",
+      "value": "TOKEN_AQUI"
+    },
+    {
+      "key": "id_usuario",
+      "value": "1"
+    },
+    {
+      "key": "id_articulo",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "1 - Alta usuario (POST /alta_usuario)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"nombre\": \"Pedro\",\n  \"apellido_paterno\": \"Landeros\",\n  \"apellido_materno\": \"Cortes\",\n  \"fecha_nacimiento\": \"2000-01-15T00:00:00.000\",\n  \"telefono\": 5512345678,\n  \"genero\": \"M\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alta_usuario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alta_usuario"
+              ]
+            }
+          }
+        },
+        {
+          "name": "2 - Login (GET /login)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/login?email={{email}}&password={{password}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{email}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3 - Consulta usuario (GET /consulta_usuario)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consulta_usuario?email={{email}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consulta_usuario"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{email}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4 - Modifica usuario (PUT /modifica_usuario)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pedro Mod\",\n  \"apellido_paterno\": \"Landeros\",\n  \"apellido_materno\": \"Cortes\",\n  \"fecha_nacimiento\": \"2000-01-15T00:00:00.000\",\n  \"telefono\": 5511112222,\n  \"genero\": \"M\",\n  \"password\": \"nueva1234\",\n  \"foto\": null\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/modifica_usuario?email={{email}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "modifica_usuario"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{email}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5 - Borra usuario (DELETE /borra_usuario)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/borra_usuario?email={{email}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "borra_usuario"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{email}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Artículos",
+      "item": [
+        {
+          "name": "6 - Alta artículo (POST /alta_articulo)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_usuario\": {{id_usuario}},\n  \"token\": \"{{token}}\",\n  \"nombre\": \"Laptop Gamer\",\n  \"descripcion\": \"Laptop potente para juegos\",\n  \"precio\": 15000.50,\n  \"cantidad\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alta_articulo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alta_articulo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7 - Consulta artículos (GET /consulta_articulos)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consulta_articulos?palabra=&id_usuario={{id_usuario}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consulta_articulos"
+              ],
+              "query": [
+                {
+                  "key": "palabra",
+                  "value": ""
+                },
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Carrito y compras",
+      "item": [
+        {
+          "name": "8 - Compra artículo (POST /compra_articulo)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_usuario\": {{id_usuario}},\n  \"token\": \"{{token}}\",\n  \"id_articulo\": {{id_articulo}},\n  \"cantidad\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/compra_articulo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "compra_articulo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9 - Consulta carrito (GET /consulta_carrito_compra)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consulta_carrito_compra?id_usuario={{id_usuario}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consulta_carrito_compra"
+              ],
+              "query": [
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10 - Modifica carrito (PUT /modifica_carrito_compra incremento=1)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/modifica_carrito_compra?id_usuario={{id_usuario}}&id_articulo={{id_articulo}}&incremento=1&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "modifica_carrito_compra"
+              ],
+              "query": [
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "id_articulo",
+                  "value": "{{id_articulo}}"
+                },
+                {
+                  "key": "incremento",
+                  "value": "1"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "11 - Modifica carrito (PUT /modifica_carrito_compra incremento=-1)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/modifica_carrito_compra?id_usuario={{id_usuario}}&id_articulo={{id_articulo}}&incremento=-1&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "modifica_carrito_compra"
+              ],
+              "query": [
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "id_articulo",
+                  "value": "{{id_articulo}}"
+                },
+                {
+                  "key": "incremento",
+                  "value": "-1"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "12 - Elimina artículo del carrito (DELETE /elimina_articulo_carrito_compra)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/elimina_articulo_carrito_compra?id_usuario={{id_usuario}}&id_articulo={{id_articulo}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "elimina_articulo_carrito_compra"
+              ],
+              "query": [
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "id_articulo",
+                  "value": "{{id_articulo}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "13 - Elimina carrito completo (DELETE /elimina_carrito_compra)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/elimina_carrito_compra?id_usuario={{id_usuario}}&token={{token}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "elimina_carrito_compra"
+              ],
+              "query": [
+                {
+                  "key": "id_usuario",
+                  "value": "{{id_usuario}}"
+                },
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
