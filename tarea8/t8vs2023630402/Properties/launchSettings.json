@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "t8vs2023630402": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7258",
+      "launchBrowser": false
+    }
+  }
+}

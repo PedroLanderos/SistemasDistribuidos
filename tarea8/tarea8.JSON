@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "e9613e99-0d87-42e3-bb15-a05a2480fdb8",
+    "name": "Tarea8-Tienda-2023630402",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:7071/api"
+    },
+    {
+      "key": "email",
+      "value": "alumno.2023630402@example.com"
+    },
+    {
+      "key": "password",
+      "value": "2023630402"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - alta_usuario (registro)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/alta_usuario",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alta_usuario"
+          ]
+        },
+        "description": "Da de alta un usuario nuevo."
+      },
+      "response": [],
+      "protocolProfileBehavior": {},
+      "requestBody": {},
+      "event": [],
+      "body": {}
+    },
+    {
+      "name": "02 - login (obtener token)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/login?email={{email}}&password={{password}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}"
+            }
+          ]
+        },
+        "description": "Obtiene token para el usuario; copia el campo 'token' de la respuesta a la variable de colección {{token}}."
+      },
+      "response": []
+    },
+    {
+      "name": "03 - consulta_usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/consulta_usuario?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "consulta_usuario"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Consulta datos del usuario autenticado."
+      },
+      "response": []
+    },
+    {
+      "name": "04 - modifica_usuario",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/modifica_usuario?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "modifica_usuario"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Modifica los datos del usuario (requiere token válido).",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"password\": \"{{password}}\",\n  \"nombre\": \"Alfredo Modificado\",\n  \"apellido_paterno\": \"Rosas\",\n  \"apellido_materno\": \"Gonzalez\",\n  \"fecha_nacimiento\": \"2005-02-02T00:00:00\",\n  \"telefono\": 5512349999,\n  \"genero\": \"M\",\n  \"foto\": \"dGVzdG8=\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "05 - borra_usuario",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/borra_usuario?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "borra_usuario"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Borra al usuario autenticado (y su foto). Úsalo solo como prueba al final."
+      },
+      "response": []
+    },
+    {
+      "name": "10 - alta_articulo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/alta_articulo?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alta_articulo"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Da de alta un artículo en la tabla stock + fotos_articulos.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop gamer\",\n  \"descripcion\": \"Laptop gamer 15 pulgadas, 16GB RAM, 512GB SSD\",\n  \"precio\": 19999.00,\n  \"existencia\": 5,\n  \"foto\": \"dGVzdG8=\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11 - consulta_articulos (por palabra clave)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/consulta_articulos?email={{email}}&token={{token}}&palabra_clave=laptop",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "consulta_articulos"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            },
+            {
+              "key": "palabra_clave",
+              "value": "laptop"
+            }
+          ]
+        },
+        "description": "Busca artículos cuyo nombre o descripción contenga la palabra clave."
+      },
+      "response": []
+    },
+    {
+      "name": "12 - compra_articulo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/compra_articulo?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "compra_articulo"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Agrega un artículo al carrito y descuenta stock (dentro de una transacción).",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id_articulo\": 1,\n  \"cantidad\": 2\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13 - elimina_articulo_carrito_compra",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/elimina_articulo_carrito_compra?email={{email}}&token={{token}}&id_articulo=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "elimina_articulo_carrito_compra"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            },
+            {
+              "key": "id_articulo",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "Elimina un artículo específico del carrito y regresa el stock."
+      },
+      "response": []
+    },
+    {
+      "name": "14 - elimina_carrito_compra",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/elimina_carrito_compra?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "elimina_carrito_compra"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Elimina todos los artículos del carrito del usuario y regresa el stock."
+      },
+      "response": []
+    },
+    {
+      "name": "15 - modifica_carrito_compra",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/modifica_carrito_compra?email={{email}}&token={{token}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "modifica_carrito_compra"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "{{email}}"
+            },
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        },
+        "description": "Cambia la cantidad de un artículo en el carrito (usa la cantidad final deseada). Valida stock y existencia del registro.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id_articulo\": 1,\n  \"cantidad\": 3\n}"
+        }
+      },
+      "response": []
+    }
+  ]
+}
