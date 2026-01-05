@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\t9_2023630402_gu.props" />
+</Project>

@@ -89,7 +89,7 @@ public class login
                 cmd_1.Parameters.AddWithValue("@password", password);
                 MySqlDataReader r = cmd_1.ExecuteReader();
                 bool existe = r.Read();
-                r.Close(); // es necesario cerrar el DataReader antes de ejecutar otro comando
+                r.Close(); 
                 if (existe)
                 {
                     string token = genera_token(20);

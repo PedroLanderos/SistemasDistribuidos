@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: t9-2023630402-gw-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: t9-2023630402-gw
+  template:
+    metadata:
+      labels:
+        app: t9-2023630402-gw
+    spec:
+      containers:
+        - name: gw
+          image: t92023630402acr.azurecr.io/t9_2023630402_gw:1
+          ports:
+            - containerPort: 8443
+          env:
+            - name: keystore
+              value: "/certs/keystore_servidor.jks"
+            - name: password
+              value: "1234567"
+          volumeMounts:
+            - name: gw-keystore
+              mountPath: /certs
+              readOnly: true
+      volumes:
+        - name: gw-keystore
+          secret:
+            secretName: t9-2023630402-gw-keystore

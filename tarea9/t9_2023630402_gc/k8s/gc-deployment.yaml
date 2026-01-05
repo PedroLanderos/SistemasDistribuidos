@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: t9-2023630402-gc-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: t9-2023630402-gc
+  template:
+    metadata:
+      labels:
+        app: t9-2023630402-gc
+    spec:
+      containers:
+        - name: gc
+          image: t92023630402acr.azurecr.io/t9_2023630402_gc:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_HOST
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_DB
+              value: "t9_2023630402_bdgc"
+            - name: MYSQL_SSLMODE
+              value: "Required"
+
+            - name: GU_BASEURL
+              value: "http://t9-2023630402-gu-svc"
+
+            # ✅ IMPORTANTE: Tu código USA GA_BASEURL pero NO lo pusiste en el YAML
+            - name: GA_BASEURL
+              value: "http://t9-2023630402-ga-svc"

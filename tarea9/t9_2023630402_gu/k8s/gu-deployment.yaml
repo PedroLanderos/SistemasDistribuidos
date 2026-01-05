@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: t9-2023630402-gu-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: t9-2023630402-gu
+  template:
+    metadata:
+      labels:
+        app: t9-2023630402-gu
+    spec:
+      containers:
+        - name: gu
+          image: t92023630402acr.azurecr.io/t9_2023630402_gu:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_HOST
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_DB
+              value: "t9_2023630402_bdgu"
+            - name: MYSQL_SSLMODE
+              value: "Required"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: t9-2023630402-ga-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: t9-2023630402-ga
+  ports:
+    - port: 80
+      targetPort: 8080

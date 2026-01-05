@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: t9-2023630402-sw-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: t9-2023630402-sw
+  template:
+    metadata:
+      labels:
+        app: t9-2023630402-sw
+    spec:
+      containers:
+        - name: sw
+          image: t92023630402acr.azurecr.io/t9_2023630402_sw:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ROOT
+              value: "/data/"
+          volumeMounts:
+            - name: webfiles
+              mountPath: /data
+      volumes:
+        - name: webfiles
+          persistentVolumeClaim:
+            claimName: t9-2023630402-web-pvc

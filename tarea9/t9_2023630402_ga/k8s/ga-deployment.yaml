@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: t9-2023630402-ga-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: t9-2023630402-ga
+  template:
+    metadata:
+      labels:
+        app: t9-2023630402-ga
+    spec:
+      containers:
+        - name: ga
+          image: t92023630402acr.azurecr.io/t9_2023630402_ga:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_HOST
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_DB
+              value: "t9_2023630402_bdga"
+            - name: MYSQL_SSLMODE
+              value: "Required"
+
+            # DNS interno de Kubernetes (service)
+            - name: GU_BASEURL
+              value: "http://t9-2023630402-gu-svc:80"
+            - name: GC_BASEURL
+              value: "http://t9-2023630402-gc-svc:80"

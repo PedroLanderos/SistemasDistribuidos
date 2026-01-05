@@ -88,7 +88,6 @@ public class modifica_carrito_compra
                     if (p.delta.Value > disponible)
                         throw new Exception("Stock insuficiente");
 
-                    // actualizar/insertar carrito
                     if (cantActual == 0)
                     {
                         var cmdIns = new MySqlCommand(
@@ -115,7 +114,6 @@ public class modifica_carrito_compra
                         cmdUpd.ExecuteNonQuery();
                     }
 
-                    // descontar del stock
                     var cmdUpdStock = new MySqlCommand(
                         @"UPDATE stock
                           SET cantidad = cantidad - @delta
